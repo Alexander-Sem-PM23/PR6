@@ -1,5 +1,5 @@
 package com.example.mobileapppractice16
-
+// Тестовое изменение для практики 6
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
