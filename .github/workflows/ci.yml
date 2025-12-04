@@ -1,49 +1,29 @@
 name: Android CI
 
-# Запускать на пуш и pull request в main
 on:
   push:
     branches:
-      - main
+      - feature_ci_cd_student16
   pull_request:
     branches:
-      - main
+      - feature_ci_cd_student16
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Клонируем код
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Устанавливаем JDK
-      - name: Set up JDK 11
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
+          java-version: '25'
           distribution: 'temurin'
-          java-version: '11'
 
-      # 3. Делаем gradlew исполняемым
-      - name: Make gradlew executable
+      - name: Grant Gradlew executable permission
         run: chmod +x ./gradlew
 
-      # 4. Кэшируем зависимости Gradle для ускорения сборки
-      - name: Cache Gradle packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      # 5. Сборка проекта
       - name: Build with Gradle
-        run: ./gradlew build --stacktrace
-
-      # 6. Запуск тестов
-      - name: Run unit tests
-        run: ./gradlew test
+        run: ./gradlew build
