@@ -1,3 +1,6 @@
+# Обновление workflow для GitHub Actions
+name: Android CI
+
 name: Android CI
 
 on:
